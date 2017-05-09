@@ -1,7 +1,7 @@
-import maintainersSaga from './maintainers/maintainers.sagas';
+import moviesSaga from './movies/movies.sagas';
 
 export default function* rootSaga() {
   yield [
-    maintainersSaga(),
+    moviesSaga(),
   ];
 }

@@ -1,20 +1,20 @@
 import { createActions, createReducer } from 'reduxsauce';
 import { Record, List, fromJS } from 'immutable';
 
-export const { Types: MaintainersTypes, Creators: MaintainersActions } = createActions({
-  fetch: ['language'],
+export const { Types: MoviesType, Creators: MoviesActions } = createActions({
+  fetch: ['query'],
   fetchSuccess: ['data'],
   fetchError: ['payload'],
-}, { prefix: 'MAINTAINERS_' });
+}, { prefix: 'MOVIES_' });
 
-const MaintainersRecord = new Record({
+const MoviesRecord = new Record({
   items: List(),
 });
 
-export const INITIAL_STATE = new MaintainersRecord({});
+export const INITIAL_STATE = new MoviesRecord({});
 
 const getSuccessHandler = (state = INITIAL_STATE, action) => state.set('items', fromJS(action.data));
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [MaintainersTypes.FETCH_SUCCESS]: getSuccessHandler,
+  [MoviesType.FETCH_SUCCESS]: getSuccessHandler,
 });

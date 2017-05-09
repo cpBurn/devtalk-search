@@ -5,7 +5,7 @@ import { fromJS } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 
 import { MaintainerList } from '../maintainerList.component';
-import { Maintainer } from '../../maintainer/maintainer.component';
+import { Maintainer } from '../../movie/maintainer.component';
 import messages from '../maintainersList.messages';
 
 

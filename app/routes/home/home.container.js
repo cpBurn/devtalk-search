@@ -3,18 +3,18 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import { Home } from './home.component';
-import { MaintainersActions } from '../../modules/maintainers/maintainers.redux';
-import { selectMaintainersItems } from '../../modules/maintainers/maintainers.selectors';
+import { MoviesActions } from '../../modules/movies/movies.redux';
+import { selectMoviesItems } from '../../modules/movies/movies.selectors';
 import { LocalesActions } from '../../modules/locales/locales.redux';
 import { selectLocalesLanguage } from '../../modules/locales/locales.selectors';
 
 const mapStateToProps = createStructuredSelector({
-  items: selectMaintainersItems,
+  items: selectMoviesItems,
   language: selectLocalesLanguage,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchMaintainers: MaintainersActions.fetch,
+  fetchMovies: MoviesActions.fetch,
   setLanguage: LocalesActions.setLanguage,
 }, dispatch);
 

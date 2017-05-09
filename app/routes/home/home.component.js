@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
 
 import messages from './home.messages';
-import { MaintainerList } from './maintainerList/maintainerList.component';
+import { MovieList } from './movieList/movieList.component';
 import { LanguageSelector } from './languageSelector/languageSelector.component';
 
 
@@ -12,20 +12,18 @@ export class Home extends PureComponent {
   static propTypes = {
     items: PropTypes.object,
     language: PropTypes.string.isRequired,
-    fetchMaintainers: PropTypes.func.isRequired,
+    fetchMovies: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
     router: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
-    this.props.fetchMaintainers(this.props.language);
+    this.fetchMovies('Titanic');
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.language !== this.props.language) {
-      this.props.fetchMaintainers(nextProps.language);
-    }
-  }
+  fetchMovies = (query) => {
+    this.props.fetchMovies(query);
+  };
 
   render() {
     return (
@@ -41,7 +39,7 @@ export class Home extends PureComponent {
 
         <div>Environment: {envConfig.name}</div>
 
-        <MaintainerList items={this.props.items} />
+        <MovieList items={this.props.items} />
 
         <LanguageSelector
           language={this.props.language}
