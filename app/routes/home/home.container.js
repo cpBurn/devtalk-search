@@ -9,7 +9,7 @@ import { LocalesActions } from '../../modules/locales/locales.redux';
 import { selectLocalesLanguage } from '../../modules/locales/locales.selectors';
 
 const mapStateToProps = createStructuredSelector({
-  items: selectMoviesItems,
+  movie: selectMoviesItems,
   language: selectLocalesLanguage,
 });
 

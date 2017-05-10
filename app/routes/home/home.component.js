@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
 
 import messages from './home.messages';
-import { MovieList } from './movieList/movieList.component';
+import { Movie } from './movie/movie.component';
 import { LanguageSelector } from './languageSelector/languageSelector.component';
 
 
 export class Home extends PureComponent {
   static propTypes = {
-    items: PropTypes.object,
+    movie: PropTypes.object,
     language: PropTypes.string.isRequired,
     fetchMovies: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
@@ -18,7 +18,7 @@ export class Home extends PureComponent {
   };
 
   componentWillMount() {
-    this.fetchMovies('Titanic');
+    this.fetchMovies('Lord of the Rings');
   }
 
   fetchMovies = (query) => {
@@ -39,7 +39,7 @@ export class Home extends PureComponent {
 
         <div>Environment: {envConfig.name}</div>
 
-        <MovieList items={this.props.items} />
+        <Movie data={this.props.movie} />
 
         <LanguageSelector
           language={this.props.language}

@@ -6,15 +6,13 @@ import { Movie } from '../movie/movie.component';
 
 export class MovieList extends PureComponent {
   static propTypes = {
-    items: PropTypes.object.isRequired,
+    movie: PropTypes.object.isRequired,
   };
 
   render() {
     return (
       <div className="movie-list">
-          {this.props.items.toArray().map((item, key) => (
-            <Movie key={key} data={item} />
-          ))}
+        <Movie data={this.props.movie} />
       </div>
     );
   }
