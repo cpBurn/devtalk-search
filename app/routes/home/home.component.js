@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
 
 import messages from './home.messages';
-import { Movie } from './movie/movie.component';
+import { MovieList } from './movieList/movieList.component';
 import { LanguageSelector } from './languageSelector/languageSelector.component';
 
 
 export class Home extends PureComponent {
   static propTypes = {
-    movie: PropTypes.object,
+    items: PropTypes.array,
     language: PropTypes.string.isRequired,
     fetchMovies: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
@@ -39,7 +39,7 @@ export class Home extends PureComponent {
 
         <div>Environment: {envConfig.name}</div>
 
-        <Movie data={this.props.movie} />
+        <MovieList data={this.props.items} />
 
         <LanguageSelector
           language={this.props.language}

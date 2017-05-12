@@ -3,14 +3,15 @@ import { get } from 'lodash';
 
 export class Movie extends PureComponent {
   static propTypes = {
-    data: PropTypes.object,
+    movie: PropTypes.object,
   };
 
   render() {
+    console.log(this.props.movie);
     return (
       <div className="movie">
-        <div className="movie__item movie__title">{get(this.props.data, 'Title')}</div>
-        <div className="movie__item">{get(this.props.data, 'Director')}</div>
+        <div className="movie__item movie__title">{get(this.props.movie, 'Title')}</div>
+        <div className="movie__item">{get(this.props.movie, 'Director')}</div>
       </div>
     );
   }

@@ -1,18 +1,18 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-
 import { Movie } from '../movie/movie.component';
 
 
 export class MovieList extends PureComponent {
   static propTypes = {
-    movie: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
   };
+
+  renderMovie = (movie, key) => <Movie movie={movie} key={key} />;
 
   render() {
     return (
       <div className="movie-list">
-        <Movie data={this.props.movie} />
+        {this.props.data.map(this.renderMovie)}
       </div>
     );
   }
