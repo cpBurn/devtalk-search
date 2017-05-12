@@ -3,12 +3,12 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import { sandbox } from 'sinon';
 
-import maintainersSaga, {} from '../maintainers.sagas';
+import moviesSaga, {} from '../movies.sagas';
 import * as apiSaga from '../../api/api.sagas';
-import { MaintainersActions } from '../maintainers.redux';
+import { MoviesActions } from '../movies.redux';
 
 
-describe('Maintainers: sagas', () => {
+describe('Movies: sagas', () => {
   let sagaTester = null;
   let userSandbox = null;
 
@@ -19,7 +19,7 @@ describe('Maintainers: sagas', () => {
         // user: { redirectUrl: '/some-url' },
       }),
     });
-    sagaTester.start(maintainersSaga);
+    sagaTester.start(moviesSaga);
 
     userSandbox = sandbox.create();
     userSandbox.stub(global, 'fetch').callsFake(() => Promise.resolve({
@@ -33,21 +33,23 @@ describe('Maintainers: sagas', () => {
 
   describe('loginSaga', () => {
     it('should pass proper params to get', () => {
+      const query = 'Lord of the rings';
       userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
 
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
+      sagaTester.dispatch(moviesSaga.fetch(query));
 
       expect(apiSaga.get.firstCall.args).to.deep.equal([
-        '/fixtures/maintainers.json', { language: 'en' },
+        'http://www.omdbapi.com', { s: query },
       ]);
     });
 
     it('should dispatch fetchSuccess action after successful API call', () => {
+      const query = 'Lord of the rings';
       userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
 
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
+      sagaTester.dispatch(MoviesActions.fetch(query));
 
-      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchSuccess('somedata'));
+      expect(sagaTester.getCalledActions()).to.include(MoviesActions.fetchSuccess('somedata'));
     });
 
     it('should dispatch fetchError action after not successful API call', () => {
@@ -55,9 +57,9 @@ describe('Maintainers: sagas', () => {
         throw 'error';
       });
 
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
+      sagaTester.dispatch(MoviesActions.fetch('Lord of the rings'));
 
-      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchError('error'));
+      expect(sagaTester.getCalledActions()).to.include(MoviesActions.fetchError('error'));
     });
   });
 });

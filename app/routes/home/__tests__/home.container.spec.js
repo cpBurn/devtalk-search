@@ -3,7 +3,7 @@ import { spy } from 'sinon';
 
 import { mapDispatchToProps } from '../home.container';
 import { LocalesActions } from '../../../modules/locales/locales.redux';
-import { MaintainersActions } from '../../../modules/movies/maintainers.redux';
+import { MoviesActions } from '../../../modules/movies/movies.redux';
 
 
 describe('Home: Container', () => {
@@ -15,12 +15,12 @@ describe('Home: Container', () => {
 
       expect(dispatch.firstCall.args[0]).to.deep.equal(LocalesActions.setLanguage());
     });
-    it('should call MaintainersActions.fetch', () => {
+    it('should call MoviesActions.fetch', () => {
       const dispatch = spy();
 
-      mapDispatchToProps(dispatch).fetchMaintainers();
+      mapDispatchToProps(dispatch).fetchMovies();
 
-      expect(dispatch.firstCall.args[0]).to.deep.equal(MaintainersActions.fetch());
+      expect(dispatch.firstCall.args[0]).to.deep.equal(MoviesActions.fetch());
     });
   });
 });

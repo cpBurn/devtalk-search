@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 
 import { Home } from '../home.component';
 import messages from '../home.messages';
-import { MaintainerList } from '../movieList/maintainerList.component';
+import { MovieList } from '../movieList/movieList.component';
 import { LanguageSelector } from '../languageSelector/languageSelector.component';
 
 
@@ -51,14 +51,14 @@ describe('Home: Component', () => {
     expect(wrapper.find('.home__title').find(FormattedMessage).prop('id')).to.equal(messages.welcome.id);
   });
 
-  it('should render <MaintainerList />', () => {
+  it('should render <MovieList />', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find(MaintainerList)).to.have.length(1);
+    expect(wrapper.find(MovieList)).to.have.length(1);
   });
 
-  it('should pass items prop to <MaintainerList />', () => {
+  it('should pass items prop to <MovieList />', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find(MaintainerList).prop('items')).to.equal(defaultProps.items);
+    expect(wrapper.find(MovieList).prop('items')).to.equal(defaultProps.items);
   });
 
   it('should render <LanguageSelector />', () => {
@@ -78,11 +78,11 @@ describe('Home: Component', () => {
     expect(setLanguage.calledOnce).to.be.true;
   });
 
-  it('should dispatch fetchMaintainers action on mount', () => {
-    const fetchMaintainers = spy();
-    shallow(component({ fetchMaintainers }));
+  it('should dispatch fetchMovies action on mount', () => {
+    const fetchMovies = spy();
+    shallow(component({ fetchMovies }));
 
-    expect(fetchMaintainers.firstCall.args[0]).to.equal(defaultProps.language);
+    expect(fetchMovies.firstCall.args[0]).to.equal(defaultProps.query);
   });
 
   it('should dispatch fetchMaintainers action on language change', () => {
