@@ -11,7 +11,9 @@ export class Movie extends PureComponent {
     return (
       <div className="movie">
         <div className="movie__item movie__title">{get(this.props.movie, 'Title')}</div>
-        <div className="movie__item">{get(this.props.movie, 'Director')}</div>
+        <img src={get(this.props.movie, 'Poster')} />
+        <div className="movie__item">{get(this.props.movie, 'Type')}</div>
+        <div className="movie__item">{get(this.props.movie, 'Year')}</div>
       </div>
     );
   }
